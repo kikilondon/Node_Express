@@ -1,11 +1,12 @@
 let express = require('express');
 let app = express();
+require('dotenv').config()
 
 //request get/ there is a path "/ ", and an handler taht in this case is a function 
-// app.get("/",function(req,res){
-//     res.send('Hello Express');
-// });
-//console.log('Hello World');
+app.get("/",function(req,res){
+    res.send('Hello Express');
+});
+console.log('Hello World');
 
 
 //dirname is a Node's globalvariable. It is an environment variable that tells you the absolute path of the directory containing the currently executing file.
@@ -23,6 +24,16 @@ app.get("/json",function(req, res){
 res.json({"message" : "Hello json"});
 
 })
+
+// use env variable, .env file, .env package
+app.get("/json", function(req,res){
+    if(process.env["MESSAGE_STYLE"] == "uppercase"){ 
+        res.json({"message": "HELLO JSON"});
+    }
+ else
+    { res.json({"message": "Hello json"});  
+ 
+}})
 
 
 
