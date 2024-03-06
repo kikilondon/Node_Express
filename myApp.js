@@ -2,6 +2,16 @@ let express = require('express');
 let app = express();
 require('dotenv').config()
 
+
+//request to add with a middlewareFunction the css for that specific file
+app.use('/public', express.static( __dirname + '/public'));
+
+//implement a Root-Level Request Logger Middleware
+app.use((req,res,next)=>{
+    console.log(`${req.method} ${req.path} - ${req.ip}`);
+    next()
+    })
+
 //request get/ there is a path "/ ", and an handler taht in this case is a function 
 app.get("/",function(req,res){
     res.send('Hello Express');
@@ -15,8 +25,6 @@ app.get('/',function(req,res){
    res.sendFile(__dirname + '/views/index.html');
 });
 
-//request to add with a middlewareFunction the css for that specific file
-app.use('/public', express.static( __dirname + '/public'));
 
 
 //create an API endpoint
