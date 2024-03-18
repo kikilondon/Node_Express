@@ -42,7 +42,14 @@ app.get("/json", function(req,res){
     { res.json({"message": "Hello json"});  
  
 }})
-
+//8 create a time server
+app.get("/now", function (req,res,next){
+    req.time =new Date().toString();
+    next();
+},
+function (req,res){
+    res.json({"time": req.time})
+})
 
 
 
