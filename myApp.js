@@ -5,6 +5,8 @@ require('dotenv').config()
 
 //request to add with a middlewareFunction the css for that specific file
 app.use('/public', express.static( __dirname + '/public'));
+//11 use body-parser to parse post request
+app.use(bodyParser.urlencoded({extended: false}))
 
 //implement a Root-Level Request Logger Middleware
 app.use((req,res,next)=>{
@@ -59,8 +61,12 @@ app.get("/:word/echo", function (req, res)  {
       echo: word
     });
   });
-
-
+//10//using query param to get input from client
+app.get("/name", function(req,res){
+    res.json ({name: req.query.first + " " + req.query.last})
+    ///name?first=firstname&last=lastname
+})
+//1 Use body-parser to Parse POST Requests
 
 
 
